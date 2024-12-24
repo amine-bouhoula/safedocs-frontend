@@ -41,9 +41,8 @@ const getFileIcon = (fileType: string) => {
 };
 
 // File Upload Section Component
-const FileUploadSection: React.FC<{ files: FileData[]; onRemove: (fileName: string) => void }> = ({
+const FileUploadSection: React.FC<{ files: FileData[]; }> = ({
   files,
-  onRemove,
 }) => (
   <Box
     display="flex"
@@ -61,7 +60,6 @@ const FileUploadSection: React.FC<{ files: FileData[]; onRemove: (fileName: stri
           fileSize={file.fileSize}
           IconComponent={getFileIcon(file.fileType)}
           uploadEndpoint="http://localhost:8001/api/v1/files/upload"
-          onRemove={onRemove} // Pass the remove handler
         />
       ))
     ) : (
@@ -128,7 +126,7 @@ export function UploadView() {
             <input type="file" hidden multiple onChange={handleFileSelect} />
           </Button>
         </Box>
-        <FileUploadSection files={files} onRemove={handleRemoveFile} />
+        <FileUploadSection files={files} />
         <Box sx={{ width: '80%', mt: 2 }}>
           <Divider />
           <Typography variant="body2" sx={{ mt: 1 }}>
